@@ -16,8 +16,8 @@ PyTorch のインストールについては、[公式サイト](https://pytorch
 ## データのダウンロード
 以下のリンクからデータをダウンロードしてください。
 
-- [デモデータ](https://drive.google.com/drive/folders/14CEgiGpSfG9g6euqFxpa-G3E0EtreE7M)
-- [元データ](https://www.kaggle.com/datasets/benjaminkz/places365)
+- デモデータ: https://drive.google.com/open?id=1QOm5lubtobVTts0c4ZpcDpdpmTZ-B5Pn
+- 元データ: https://www.kaggle.com/datasets/benjaminkz/places365
 
 ## 実行方法
 1. ダウンロードしたデータを `./data/` に配置します。
