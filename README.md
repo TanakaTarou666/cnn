@@ -11,7 +11,7 @@ conda activate [仮想環境名]
 
 PyTorch のインストールについては、[公式サイト](https://pytorch.org/) を参照してください。
 
-![PyTorch Installation](img/image.png)
+![Test Image 1](img/pytorch_install.png)
 
 ## データのダウンロード
 以下のリンクからデータをダウンロードしてください。
