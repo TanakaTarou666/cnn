@@ -1,7 +1,7 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-import utils 
+import utils
 import datetime
 import sys
 from config import DEVICE, BATCH_SIZE, LR, EPOCHS, IMAGE_DIRS, TRANSFORM, display_config

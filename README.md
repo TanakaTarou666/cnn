@@ -9,19 +9,20 @@ conda create --name [仮想環境名] --file requirements.txt
 conda activate [仮想環境名]
 ```
 
-PyTorch のインストールについては、[公式サイト](https://pytorch.org/) を参照してください。
+PyTorch のインストールについては、[公式サイト](https://pytorch.org/) を参照にコマンドを入手してください。
 
 ![Test Image 1](img/pytorch_install.png)
 
 ## データのダウンロード
-以下のリンクからデモデータをダウンロードしし、`./data/small-places/` となるように配置してください。
+以下のリンクからデモデータをダウンロードし、`./data/small-places/` となるように配置してください。
 
-- デモデータ: https://drive.google.com/open?id=1QOm5lubtobVTts0c4ZpcDpdpmTZ-B5Pn
+- デモデータ: https://drive.google.com/drive/folders/1IheiqhXHuR5DgX7-DY6Usc6sItROpYbL?usp=drive_link
 - ※元データ: https://www.kaggle.com/datasets/benjaminkz/places365
 
 ## 実行方法
 1. `config.py` に分類したいクラスのディレクトリを記述します。
 2. 以下のコマンドを実行してください。   
     ```bash
+    cd src
     python main.py
     ```
