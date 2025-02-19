@@ -55,5 +55,5 @@ def display_config() -> None:
         print("LR:", LR)
         print("EPOCHS:", EPOCHS)
         print("IMAGE_SIZE:", IMAGE_SIZE)
-        print("OUTPUT_SIZE:", len(IMAGE_DIRS["train"]))
+        print("OUTPUT_CLASSES:", len(IMAGE_DIRS["train"]))
         print("==================================================" + "\n")
