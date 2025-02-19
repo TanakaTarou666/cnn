@@ -14,16 +14,14 @@ PyTorch のインストールについては、[公式サイト](https://pytorch
 ![Test Image 1](img/pytorch_install.png)
 
 ## データのダウンロード
-以下のリンクからデータをダウンロードしてください。
+以下のリンクからデモデータをダウンロードしし、`./data/small-places/` となるように配置してください。
 
 - デモデータ: https://drive.google.com/open?id=1QOm5lubtobVTts0c4ZpcDpdpmTZ-B5Pn
-- 元データ: https://www.kaggle.com/datasets/benjaminkz/places365
+- ※元データ: https://www.kaggle.com/datasets/benjaminkz/places365
 
 ## 実行方法
-1. ダウンロードしたデータを `./data/` に配置します。
-2. `config.py` に分類したいクラスのディレクトリを記述します。
-3. 以下のコマンドを実行してください。
-
-```bash
-python main.py
-```
+1. `config.py` に分類したいクラスのディレクトリを記述します。
+2. 以下のコマンドを実行してください。   
+    ```bash
+    python main.py
+    ```
