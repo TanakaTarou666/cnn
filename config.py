@@ -10,7 +10,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 SEED = 0
 BATCH_SIZE = 32
 LR = 0.001
-EPOCHS = 10
+EPOCHS = 2
 IMAGE_SIZE = (256, 256)
 
 # 設定の表示
