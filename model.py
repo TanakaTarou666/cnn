@@ -28,7 +28,6 @@ class MyCNN(nn.Module):
         x = self.fc1(x)
         x = self.relu(x)
         x = self.fc2(x)
-
         return x
     
     # ランダムな重みに初期化

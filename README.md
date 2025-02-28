@@ -3,10 +3,12 @@
 
 ## 環境構築
 Anaconda を使用します。以下のコマンドで仮想環境を作成し、アクティブ化してください。
+pytorchがcondaで入れられないので、パッケージのインストールは全てpipでお願いします。(ライブラリの競合を避けるため)
 
 ```bash
-conda create --name [仮想環境名] --file requirements.txt
+conda create --name [仮想環境名] python=3.12.0
 conda activate [仮想環境名]
+pip install -r requirements.txt
 ```
 
 PyTorch のインストールについては、[公式サイト](https://pytorch.org/) を参照してください。
