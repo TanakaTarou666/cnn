@@ -9,7 +9,7 @@ class MyCNN(nn.Module):
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
         
-        self.fc1 = nn.Linear(32 * 64 * 64, 256)
+        self.fc1 = nn.Linear(64 * 64 *32, 256)
         self.fc2 = nn.Linear(256, num_classes)
 
         self._initialize_weights()
