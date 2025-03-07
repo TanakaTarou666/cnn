@@ -1,12 +1,12 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-import utils
+import modules.utils as utils
 import datetime
 import sys
 from config import DEVICE, BATCH_SIZE, LR, EPOCHS, IMAGE_DIRS, TRANSFORM, display_config
-from dataset import MyDataset
-from model import MyCNN
+from modules.dataset import MyDataset
+from modules.model import MyCNN
 
 # 乱数シードの初期化
 utils.set_seed()
