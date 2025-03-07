@@ -39,7 +39,7 @@ result_dir = utils.create_result_directory()
 utils.save_config(result_dir)
 
 # 結果を保存するためのCSVファイルの初期化
-csv_columns = ['Epoch', 'Loss', 'Accuracy', 'Test_Accuracy', 'time']
+csv_columns = ['Epoch', 'Loss', 'Train_Accuracy', 'Test_Accuracy', 'time']
 csv_file = utils.save_results_to_csv(result_dir, csv_columns)
 
 # 学習ループ開始
@@ -52,7 +52,7 @@ for epoch in range(EPOCHS):
     correct = 0
     total = 0
      
-    ''' 学習ステップ '''
+    """ 学習ステップ """
 
     # 学習モードに変更
     model.train()
@@ -76,7 +76,7 @@ for epoch in range(EPOCHS):
     epoch_end_time = datetime.datetime.now()    
 
 
-    ''' 評価ステップ '''
+    """ 評価ステップ """
 
     # 評価モードに変更
     model.eval()

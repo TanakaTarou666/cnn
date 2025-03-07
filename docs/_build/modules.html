@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modules package &mdash; simple-cnn 0.0.1 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4d4437c9"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="prev" title="simple-cnn documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            simple-cnn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modules package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dataset">dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.dataset.MyDataset"><code class="docutils literal notranslate"><span class="pre">MyDataset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.dataset.MyDataset.transform"><code class="docutils literal notranslate"><span class="pre">MyDataset.transform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.dataset.MyDataset.loader"><code class="docutils literal notranslate"><span class="pre">MyDataset.loader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.dataset.MyDataset.image_paths"><code class="docutils literal notranslate"><span class="pre">MyDataset.image_paths</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.dataset.MyDataset.labels"><code class="docutils literal notranslate"><span class="pre">MyDataset.labels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.dataset.MyDataset.class_to_idx"><code class="docutils literal notranslate"><span class="pre">MyDataset.class_to_idx</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.model">model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.model.MyCNN"><code class="docutils literal notranslate"><span class="pre">MyCNN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.relu"><code class="docutils literal notranslate"><span class="pre">MyCNN.relu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.pool"><code class="docutils literal notranslate"><span class="pre">MyCNN.pool</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.conv1"><code class="docutils literal notranslate"><span class="pre">MyCNN.conv1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.conv2"><code class="docutils literal notranslate"><span class="pre">MyCNN.conv2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.fc1"><code class="docutils literal notranslate"><span class="pre">MyCNN.fc1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.fc2"><code class="docutils literal notranslate"><span class="pre">MyCNN.fc2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules.model.MyCNN.forward"><code class="docutils literal notranslate"><span class="pre">MyCNN.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-modules.utils">utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utils.create_result_directory"><code class="docutils literal notranslate"><span class="pre">create_result_directory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utils.save_best_model"><code class="docutils literal notranslate"><span class="pre">save_best_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utils.save_config"><code class="docutils literal notranslate"><span class="pre">save_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utils.save_epoch_results"><code class="docutils literal notranslate"><span class="pre">save_epoch_results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utils.save_results_to_csv"><code class="docutils literal notranslate"><span class="pre">save_results_to_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules.utils.set_seed"><code class="docutils literal notranslate"><span class="pre">set_seed()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">simple-cnn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">modules package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modules-package">
+<h1>modules package<a class="headerlink" href="#modules-package" title="Link to this heading"></a></h1>
+<section id="dataset">
+<h2>dataset<a class="headerlink" href="#dataset" title="Link to this heading"></a></h2>
+<p>テスト</p>
+<dl class="py class" id="module-modules.dataset">
+<dt class="sig sig-object py" id="modules.dataset.MyDataset">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.dataset.</span></span><span class="sig-name descname"><span class="pre">MyDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_dirs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Compose</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/dataset.html#MyDataset"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.dataset.MyDataset" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>画像データセットを作成するカスタム Dataset クラス。</p>
+<p>指定されたディレクトリから画像を読み込み、指定された前処理を適用して
+PyTorch の Dataset として使用できる形式にする。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.dataset.MyDataset.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#modules.dataset.MyDataset.transform" title="Link to this definition"></a></dt>
+<dd><p>画像に適用する前処理。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torchvision.transforms.Compose</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.dataset.MyDataset.loader">
+<span class="sig-name descname"><span class="pre">loader</span></span><a class="headerlink" href="#modules.dataset.MyDataset.loader" title="Link to this definition"></a></dt>
+<dd><p>画像を読み込む関数。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.dataset.MyDataset.image_paths">
+<span class="sig-name descname"><span class="pre">image_paths</span></span><a class="headerlink" href="#modules.dataset.MyDataset.image_paths" title="Link to this definition"></a></dt>
+<dd><p>画像ファイルのパス一覧。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.dataset.MyDataset.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><a class="headerlink" href="#modules.dataset.MyDataset.labels" title="Link to this definition"></a></dt>
+<dd><p>画像のラベル一覧。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.dataset.MyDataset.class_to_idx">
+<span class="sig-name descname"><span class="pre">class_to_idx</span></span><a class="headerlink" href="#modules.dataset.MyDataset.class_to_idx" title="Link to this definition"></a></dt>
+<dd><p>クラス名をインデックスにマッピングする辞書。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.model">
+<span id="model"></span><h2>model<a class="headerlink" href="#module-modules.model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.model.MyCNN">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.model.</span></span><span class="sig-name descname"><span class="pre">MyCNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/model.html#MyCNN"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.model.MyCNN" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>畳み込みニューラルネットワーク (CNN) の実装。</p>
+<p>2 層の畳み込み層と 2 層の全結合層から構成されるシンプルな CNN。
+ReLU 活性化関数と最大プーリング層を使用し、最終的に分類を行う。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.model.MyCNN.relu">
+<span class="sig-name descname"><span class="pre">relu</span></span><a class="headerlink" href="#modules.model.MyCNN.relu" title="Link to this definition"></a></dt>
+<dd><p>活性化関数 ReLU。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.ReLU</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.model.MyCNN.pool">
+<span class="sig-name descname"><span class="pre">pool</span></span><a class="headerlink" href="#modules.model.MyCNN.pool" title="Link to this definition"></a></dt>
+<dd><p>2×2 の最大プーリング層。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.MaxPool2d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.model.MyCNN.conv1">
+<span class="sig-name descname"><span class="pre">conv1</span></span><a class="headerlink" href="#modules.model.MyCNN.conv1" title="Link to this definition"></a></dt>
+<dd><p>3 チャネル入力、16 チャネル出力の畳み込み層。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.Conv2d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.model.MyCNN.conv2">
+<span class="sig-name descname"><span class="pre">conv2</span></span><a class="headerlink" href="#modules.model.MyCNN.conv2" title="Link to this definition"></a></dt>
+<dd><p>16 チャネル入力、32 チャネル出力の畳み込み層。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.Conv2d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.model.MyCNN.fc1">
+<span class="sig-name descname"><span class="pre">fc1</span></span><a class="headerlink" href="#modules.model.MyCNN.fc1" title="Link to this definition"></a></dt>
+<dd><p>全結合層、入力次元は <cite>32 * 64 * 64</cite>、出力次元は 256。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.Linear</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.model.MyCNN.fc2">
+<span class="sig-name descname"><span class="pre">fc2</span></span><a class="headerlink" href="#modules.model.MyCNN.fc2" title="Link to this definition"></a></dt>
+<dd><p>全結合層、入力次元は 256、出力次元は <cite>num_classes</cite>。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.Linear</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.model.MyCNN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/modules/model.html#MyCNN.forward"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.model.MyCNN.forward" title="Link to this definition"></a></dt>
+<dd><p>順伝播を実行し、入力データを分類する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) -- 入力画像のバッチ (shape: [batch_size, 3, 256, 256])。</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>クラスごとのスコア (shape: [batch_size, num_classes])。</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.utils">
+<span id="utils"></span><h2>utils<a class="headerlink" href="#module-modules.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.utils.create_result_directory">
+<span class="sig-prename descclassname"><span class="pre">modules.utils.</span></span><span class="sig-name descname"><span class="pre">create_result_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/modules/utils.html#create_result_directory"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.utils.create_result_directory" title="Link to this definition"></a></dt>
+<dd><p>結果を保存するためのディレクトリを作成する。</p>
+<p><cite>BASE_RESULT_DIR</cite> と <cite>RESULT_DIR</cite> を結合し、存在しない場合はディレクトリを作成する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>作成された結果保存用ディレクトリのパス。</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.utils.save_best_model">
+<span class="sig-prename descclassname"><span class="pre">modules.utils.</span></span><span class="sig-name descname"><span class="pre">save_best_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/modules/utils.html#save_best_model"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.utils.save_best_model" title="Link to this definition"></a></dt>
+<dd><p>最良のモデルを保存する。</p>
+<p>現在の損失がこれまでの最小損失よりも小さい場合、モデルの重みを <cite>result_dir</cite> に保存する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>torch.nn.Module</em>) -- 保存する PyTorch モデル。</p></li>
+<li><p><strong>loss</strong> (<em>float</em>) -- 現在のエポックの損失値。</p></li>
+<li><p><strong>best_loss</strong> (<em>float</em>) -- これまでの最小損失値。</p></li>
+<li><p><strong>result_dir</strong> (<em>str</em>) -- モデルを保存するディレクトリのパス。</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>更新後の最小損失値。</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.utils.save_config">
+<span class="sig-prename descclassname"><span class="pre">modules.utils.</span></span><span class="sig-name descname"><span class="pre">save_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/modules/utils.html#save_config"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.utils.save_config" title="Link to this definition"></a></dt>
+<dd><p>設定ファイルを指定したディレクトリにコピーする。</p>
+<p><cite>config.py</cite> ファイルを結果保存用ディレクトリ (<cite>result_dir</cite>) にコピーし、
+実験設定を後から再現可能にする。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result_dir</strong> (<em>str</em>) -- 設定ファイルを保存するディレクトリのパス。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.utils.save_epoch_results">
+<span class="sig-prename descclassname"><span class="pre">modules.utils.</span></span><span class="sig-name descname"><span class="pre">save_epoch_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epoch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_accuracy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_accuracy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/modules/utils.html#save_epoch_results"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.utils.save_epoch_results" title="Link to this definition"></a></dt>
+<dd><p>エポックごとの学習結果を CSV ファイルに書き込む。</p>
+<p>学習の進行状況を記録し、各エポックごとの損失、精度、経過時間を CSV に追加する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_file</strong> (<em>str</em>) -- 結果を保存する CSV ファイルのパス。</p></li>
+<li><p><strong>epoch</strong> (<em>int</em>) -- 現在のエポック数。</p></li>
+<li><p><strong>running_loss</strong> (<em>float</em>) -- 学習時の累積損失値。</p></li>
+<li><p><strong>train_loader</strong> -- 訓練データの DataLoader（バッチ数の計算に使用）。</p></li>
+<li><p><strong>train_accuracy</strong> (<em>float</em>) -- 訓練データでの精度。</p></li>
+<li><p><strong>test_accuracy</strong> (<em>float</em>) -- テストデータでの精度。</p></li>
+<li><p><strong>start_time</strong> (<em>float</em>) -- エポック開始時の時間（time.time() の値）。</p></li>
+<li><p><strong>end_time</strong> (<em>float</em>) -- エポック終了時の時間（time.time() の値）。</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.utils.save_results_to_csv">
+<span class="sig-prename descclassname"><span class="pre">modules.utils.</span></span><span class="sig-name descname"><span class="pre">save_results_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csv_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/modules/utils.html#save_results_to_csv"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.utils.save_results_to_csv" title="Link to this definition"></a></dt>
+<dd><p>結果を保存するための CSV ファイルを初期化する。</p>
+<p>指定したカラム名でヘッダーを作成し、CSV ファイルを <cite>result_dir</cite> に保存する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_dir</strong> (<em>str</em>) -- CSV ファイルを保存するディレクトリのパス。</p></li>
+<li><p><strong>csv_columns</strong> (<em>list</em>) -- CSV のヘッダーとなるカラム名のリスト。</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>作成された CSV ファイルのパス。</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modules.utils.set_seed">
+<span class="sig-prename descclassname"><span class="pre">modules.utils.</span></span><span class="sig-name descname"><span class="pre">set_seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/modules/utils.html#set_seed"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#modules.utils.set_seed" title="Link to this definition"></a></dt>
+<dd><p>乱数シードを設定し、再現性を確保する。</p>
+<p>PyTorch および Python の乱数シードを固定し、CUDA を使用する際の再現性も確保するための設定を行う。</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="simple-cnn documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tsuyuzaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

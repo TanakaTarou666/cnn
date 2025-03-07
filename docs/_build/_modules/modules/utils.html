@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modules.utils &mdash; simple-cnn 0.0.1 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=4d4437c9"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=4755f45a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            simple-cnn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">modules package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">simple-cnn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">modules.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>modules.utils のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">SEED</span><span class="p">,</span> <span class="n">BASE_RESULT_DIR</span><span class="p">,</span> <span class="n">RESULT_DIR</span>
+
+
+<div class="viewcode-block" id="set_seed">
+<a class="viewcode-back" href="../../modules.html#modules.utils.set_seed">[ドキュメント]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_seed</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    乱数シードを設定し、再現性を確保する。</span>
+
+<span class="sd">    PyTorch および Python の乱数シードを固定し、CUDA を使用する際の再現性も確保するための設定を行う。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+
+    <span class="c1"># cuDNN の再現性を確保するための設定</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="create_result_directory">
+<a class="viewcode-back" href="../../modules.html#modules.utils.create_result_directory">[ドキュメント]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_result_directory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    結果を保存するためのディレクトリを作成する。</span>
+
+<span class="sd">    `BASE_RESULT_DIR` と `RESULT_DIR` を結合し、存在しない場合はディレクトリを作成する。</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: 作成された結果保存用ディレクトリのパス。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_RESULT_DIR</span><span class="p">,</span> <span class="n">RESULT_DIR</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">result_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_dir</span></div>
+
+
+
+<div class="viewcode-block" id="save_config">
+<a class="viewcode-back" href="../../modules.html#modules.utils.save_config">[ドキュメント]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_config</span><span class="p">(</span><span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    設定ファイルを指定したディレクトリにコピーする。</span>
+
+<span class="sd">    `config.py` ファイルを結果保存用ディレクトリ (`result_dir`) にコピーし、</span>
+<span class="sd">    実験設定を後から再現可能にする。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        result_dir (str): 設定ファイルを保存するディレクトリのパス。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s1">&#39;./config.py&#39;</span><span class="p">,</span> <span class="n">result_dir</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="save_results_to_csv">
+<a class="viewcode-back" href="../../modules.html#modules.utils.save_results_to_csv">[ドキュメント]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_results_to_csv</span><span class="p">(</span><span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">csv_columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    結果を保存するための CSV ファイルを初期化する。</span>
+
+<span class="sd">    指定したカラム名でヘッダーを作成し、CSV ファイルを `result_dir` に保存する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        result_dir (str): CSV ファイルを保存するディレクトリのパス。</span>
+<span class="sd">        csv_columns (list): CSV のヘッダーとなるカラム名のリスト。</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: 作成された CSV ファイルのパス。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">csv_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_dir</span><span class="p">,</span> <span class="s1">&#39;result.csv&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">csv_columns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">csv_file</span></div>
+
+
+
+<div class="viewcode-block" id="save_epoch_results">
+<a class="viewcode-back" href="../../modules.html#modules.utils.save_epoch_results">[ドキュメント]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_epoch_results</span><span class="p">(</span><span class="n">csv_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">epoch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">running_loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> 
+                       <span class="n">train_accuracy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">test_accuracy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+                       <span class="n">start_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    エポックごとの学習結果を CSV ファイルに書き込む。</span>
+
+<span class="sd">    学習の進行状況を記録し、各エポックごとの損失、精度、経過時間を CSV に追加する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        csv_file (str): 結果を保存する CSV ファイルのパス。</span>
+<span class="sd">        epoch (int): 現在のエポック数。</span>
+<span class="sd">        running_loss (float): 学習時の累積損失値。</span>
+<span class="sd">        train_loader: 訓練データの DataLoader（バッチ数の計算に使用）。</span>
+<span class="sd">        train_accuracy (float): 訓練データでの精度。</span>
+<span class="sd">        test_accuracy (float): テストデータでの精度。</span>
+<span class="sd">        start_time (float): エポック開始時の時間（time.time() の値）。</span>
+<span class="sd">        end_time (float): エポック終了時の時間（time.time() の値）。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">time_taken</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">),</span> <span class="n">train_accuracy</span><span class="p">,</span> <span class="n">test_accuracy</span><span class="p">,</span> <span class="n">time_taken</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="save_best_model">
+<a class="viewcode-back" href="../../modules.html#modules.utils.save_best_model">[ドキュメント]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_best_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    最良のモデルを保存する。</span>
+
+<span class="sd">    現在の損失がこれまでの最小損失よりも小さい場合、モデルの重みを `result_dir` に保存する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (torch.nn.Module): 保存する PyTorch モデル。</span>
+<span class="sd">        loss (float): 現在のエポックの損失値。</span>
+<span class="sd">        best_loss (float): これまでの最小損失値。</span>
+<span class="sd">        result_dir (str): モデルを保存するディレクトリのパス。</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: 更新後の最小損失値。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
+        <span class="n">best_loss</span> <span class="o">=</span> <span class="n">loss</span>
+        <span class="n">model_save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_dir</span><span class="p">,</span> <span class="s1">&#39;best_model.pth&#39;</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">model_save_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">best_loss</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tsuyuzaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
