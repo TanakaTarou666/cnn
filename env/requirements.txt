@@ -1,0 +1,24 @@
+# 機械学習フレームワーク
+# 以下ではインストールできないので、pytorchのサイトから直接コマンドを持ってくる
+# torch
+# torchvision
+
+# データ操作ライブラリ
+numpy==2.2.3
+pandas==2.2.3
+
+# 画像処理ライブラリ
+Pillow
+opencv-python
+
+# モデル保存・読み込み
+h5py
+
+# 可視化ライブラリ
+matplotlib
+seaborn
+
+# その他
+scikit-learn
+scipy
+tqdm
