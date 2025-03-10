@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 
 # 必要なパッケージをインストール
 RUN apt-get update \
-    && apt-get upgrade -y apt-utils curl vim python3.12 python3-pip python3.12-venv \
+    && apt-get upgrade -y apt-utils curl vim python3.12 python3-pip python3.12-venv git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
