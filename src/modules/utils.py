@@ -1,9 +1,11 @@
-import torch
-import os
-import shutil
-import random
 import csv
-from config import SEED, BASE_RESULT_DIR, RESULT_DIR
+import os
+import random
+import shutil
+
+import torch
+
+from config import BASE_RESULT_DIR, RESULT_DIR, SEED
 
 
 def set_seed() -> None:
@@ -46,7 +48,7 @@ def save_config(result_dir: str) -> None:
     Args:
         result_dir (str): 設定ファイルを保存するディレクトリのパス。
     """
-    shutil.copy('./config.py', result_dir)
+    shutil.copy("./config.py", result_dir)
 
 
 def save_results_to_csv(result_dir: str, csv_columns: list) -> str:
@@ -62,16 +64,23 @@ def save_results_to_csv(result_dir: str, csv_columns: list) -> str:
     Returns:
         str: 作成された CSV ファイルのパス。
     """
-    csv_file = os.path.join(result_dir, 'result.csv')
-    with open(csv_file, mode='w', newline='') as file:
+    csv_file = os.path.join(result_dir, "result.csv")
+    with open(csv_file, mode="w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(csv_columns)
     return csv_file
 
 
-def save_epoch_results(csv_file: str, epoch: int, running_loss: float, train_loader, 
-                       train_accuracy: float, test_accuracy: float, 
-                       start_time: float, end_time: float) -> None:
+def save_epoch_results(
+    csv_file: str,
+    epoch: int,
+    running_loss: float,
+    train_loader,
+    train_accuracy: float,
+    test_accuracy: float,
+    start_time: float,
+    end_time: float,
+) -> None:
     """
     エポックごとの学習結果を CSV ファイルに書き込む。
 
@@ -87,13 +96,23 @@ def save_epoch_results(csv_file: str, epoch: int, running_loss: float, train_loa
         start_time (float): エポック開始時の時間（time.time() の値）。
         end_time (float): エポック終了時の時間（time.time() の値）。
     """
-    with open(csv_file, mode='a', newline='') as file:
+    with open(csv_file, mode="a", newline="") as file:
         writer = csv.writer(file)
         time_taken = end_time - start_time
-        writer.writerow([epoch + 1, running_loss / len(train_loader), train_accuracy, test_accuracy, time_taken])
+        writer.writerow(
+            [
+                epoch + 1,
+                running_loss / len(train_loader),
+                train_accuracy,
+                test_accuracy,
+                time_taken,
+            ]
+        )
 
 
-def save_best_model(model: torch.nn.Module, loss: float, best_loss: float, result_dir: str) -> float:
+def save_best_model(
+    model: torch.nn.Module, loss: float, best_loss: float, result_dir: str
+) -> float:
     """
     最良のモデルを保存する。
 
@@ -110,6 +129,6 @@ def save_best_model(model: torch.nn.Module, loss: float, best_loss: float, resul
     """
     if loss < best_loss:
         best_loss = loss
-        model_save_path = os.path.join(result_dir, 'best_model.pth')
+        model_save_path = os.path.join(result_dir, "best_model.pth")
         torch.save(model.state_dict(), model_save_path)
     return best_loss

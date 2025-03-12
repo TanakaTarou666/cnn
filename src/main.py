@@ -1,10 +1,12 @@
-import torch
-import torch.optim as optim
-import torch.nn as nn
-import modules.utils as utils
 import datetime
 import sys
-from config import DEVICE, BATCH_SIZE, LR, EPOCHS, IMAGE_DIRS, TRANSFORM, display_config
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+import modules.utils as utils
+from config import BATCH_SIZE, DEVICE, EPOCHS, IMAGE_DIRS, LR, TRANSFORM, display_config
 from modules.dataset import MyDataset
 from modules.model import MyCNN
 
@@ -15,12 +17,16 @@ utils.set_seed()
 display_config()
 
 # 学習のデータローダーの作成
-train_dataset = MyDataset(IMAGE_DIRS["train"],TRANSFORM)
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+train_dataset = MyDataset(IMAGE_DIRS["train"], TRANSFORM)
+train_loader = torch.utils.data.DataLoader(
+    train_dataset, batch_size=BATCH_SIZE, shuffle=True
+)
 
 # テストのデータローダーの取得
-test_dataset = MyDataset(IMAGE_DIRS["test"],TRANSFORM)
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
+test_dataset = MyDataset(IMAGE_DIRS["test"], TRANSFORM)
+test_loader = torch.utils.data.DataLoader(
+    test_dataset, batch_size=BATCH_SIZE, shuffle=False
+)
 
 # モデルの初期化
 num_classes = len(IMAGE_DIRS["train"])
@@ -39,7 +45,7 @@ result_dir = utils.create_result_directory()
 utils.save_config(result_dir)
 
 # 結果を保存するためのCSVファイルの初期化
-csv_columns = ['Epoch', 'Loss', 'Train_Accuracy', 'Test_Accuracy', 'time']
+csv_columns = ["Epoch", "Loss", "Train_Accuracy", "Test_Accuracy", "time"]
 csv_file = utils.save_results_to_csv(result_dir, csv_columns)
 
 # 学習ループ開始
@@ -51,7 +57,7 @@ for epoch in range(EPOCHS):
     running_loss = 0.0
     correct = 0
     total = 0
-     
+
     """ 学習ステップ """
 
     # 学習モードに変更
@@ -73,8 +79,7 @@ for epoch in range(EPOCHS):
         running_loss += loss.item()
 
     # エポック終了時の時刻を記録
-    epoch_end_time = datetime.datetime.now()    
-
+    epoch_end_time = datetime.datetime.now()
 
     """ 評価ステップ """
 
@@ -108,13 +113,26 @@ for epoch in range(EPOCHS):
         test_accuracy = 100 * correct / total
 
     # エポックごとの結果を表示
-    print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {running_loss/len(train_loader):.4f}, Train Accuracy: {train_accuracy:.2f}%, Test Accuracy: {test_accuracy:.2f}%")
+    print(
+        f"Epoch [{epoch+1}/{EPOCHS}], Loss: {running_loss/len(train_loader):.4f}, Train Accuracy: {train_accuracy:.2f}%, Test Accuracy: {test_accuracy:.2f}%"
+    )
 
     # エポックごとの結果をCSVに保存
-    utils.save_epoch_results(csv_file, epoch, running_loss, train_loader, train_accuracy, test_accuracy, epoch_start_time, epoch_end_time)
+    utils.save_epoch_results(
+        csv_file,
+        epoch,
+        running_loss,
+        train_loader,
+        train_accuracy,
+        test_accuracy,
+        epoch_start_time,
+        epoch_end_time,
+    )
 
     # 最良モデルを保存
-    min_running_loss = utils.save_best_model(model, running_loss, min_running_loss, result_dir)
+    min_running_loss = utils.save_best_model(
+        model, running_loss, min_running_loss, result_dir
+    )
 
 
 print("Training Finished!")

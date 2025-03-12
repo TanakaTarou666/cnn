@@ -1,18 +1,20 @@
 import os
 import random
+from typing import Dict, List, Optional, Tuple
+
 import torch
 import torchvision
 import torchvision.datasets as datasets
 from torch.utils.data import Dataset
-from typing import Optional, List, Tuple, Dict
+
 
 class MyDataset(Dataset):
     """
     画像データセットを作成するカスタム Dataset クラス。
-    
+
     指定されたディレクトリから画像を読み込み、指定された前処理を適用して
     PyTorch の Dataset として使用できる形式にする。
-    
+
     Attributes:
         transform (torchvision.transforms.Compose): 画像に適用する前処理。
         loader (Callable): 画像を読み込む関数。
@@ -20,16 +22,22 @@ class MyDataset(Dataset):
         labels (List[int]): 画像のラベル一覧。
         class_to_idx (Dict[str, int]): クラス名をインデックスにマッピングする辞書。
     """
-    def __init__(self, image_dirs: List[str], transform: torchvision.transforms.Compose, num_samples: Optional[int] = None):
+
+    def __init__(
+        self,
+        image_dirs: List[str],
+        transform: torchvision.transforms.Compose,
+        num_samples: Optional[int] = None,
+    ):
         """
         MyDataset クラスのコンストラクタ。
-        
+
         Args:
             image_dirs (List[str]): 画像を格納するディレクトリのリスト。
             transform (torchvision.transforms.Compose): 画像に適用する前処理。
             num_samples (Optional[int], optional): 使用する画像の最大数。デフォルトは None（全画像を使用）。
         """
-        self.transform = transform 
+        self.transform = transform
         self.loader = datasets.folder.default_loader
         self.image_paths: List[str] = []
         self.labels: List[int] = []
@@ -39,7 +47,11 @@ class MyDataset(Dataset):
         for dir in self.class_to_idx:
             if not os.path.isdir(dir):
                 continue
-            images = [os.path.join(dir, f) for f in os.listdir(dir) if f.endswith(('.png', '.jpg', '.jpeg', '.JPG'))]
+            images = [
+                os.path.join(dir, f)
+                for f in os.listdir(dir)
+                if f.endswith((".png", ".jpg", ".jpeg", ".JPG"))
+            ]
             self.image_paths.extend(images)
             self.labels.extend([self.class_to_idx[dir]] * len(images))
 
@@ -52,7 +64,7 @@ class MyDataset(Dataset):
     def __len__(self) -> int:
         """
         データセットのサイズを返す。
-        
+
         Returns:
             int: データセット内のサンプル数。
         """
@@ -61,10 +73,10 @@ class MyDataset(Dataset):
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, int]:
         """
         指定されたインデックスのデータを取得する。
-        
+
         Args:
             idx (int): 取得するデータのインデックス。
-        
+
         Returns:
             Tuple[torch.Tensor, int]: 画像データと対応するラベル。
         """

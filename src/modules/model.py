@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+
 class MyCNN(nn.Module):
     """
     畳み込みニューラルネットワーク (CNN) の実装。
@@ -31,7 +32,7 @@ class MyCNN(nn.Module):
         # 畳み込み層
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=2, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=2, padding=1)
-        
+
         # 全結合層
         self.fc1 = nn.Linear(16 * 16 * 32, 256)
         self.fc2 = nn.Linear(256, num_classes)
@@ -56,7 +57,7 @@ class MyCNN(nn.Module):
         x = self.conv2(x)
         x = self.relu(x)
         x = self.pool(x)
-        
+
         # 平坦化処理（全結合層に入力するため）
         x = x.view(x.size(0), -1)
 
@@ -65,7 +66,7 @@ class MyCNN(nn.Module):
         x = self.fc2(x)
 
         return x
-    
+
     def _initialize_weights(self) -> None:
         """
         モデルの重みを適切に初期化する。
@@ -75,6 +76,6 @@ class MyCNN(nn.Module):
         """
         for m in self.modules():
             if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
-                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+                nn.init.kaiming_normal_(m.weight, mode="fan_out", nonlinearity="relu")
                 if m.bias is not None:
                     nn.init.uniform_(m.bias, a=-0.1, b=0.1)

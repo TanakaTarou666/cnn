@@ -18,33 +18,40 @@ IS_DISPLAY_CONFIG = True
 
 # データセットのディレクトリ
 IMAGE_DIRS = {
-    "train":[
-        "../data/small-places/train/wave", 
+    "train": [
+        "../data/small-places/train/wave",
         "../data/small-places/train/tower",
-        "../data/small-places/train/escalotor", 
-        # "../data/small-places/train/wind_farm", 
+        "../data/small-places/train/escalotor",
+        # "../data/small-places/train/wind_farm",
         # "../data/small-places/train/airfield",
-        ],
-    "test":[
-        "../data/small-places/test/wave", 
+    ],
+    "test": [
+        "../data/small-places/test/wave",
         "../data/small-places/test/tower",
-        "../data/small-places/test/escalotor", 
-        # "../data/small-places/test/wind_farm", 
+        "../data/small-places/test/escalotor",
+        # "../data/small-places/test/wind_farm",
         # "../data/small-places/test/airfield",
-        ]    
-    }
+    ],
+}
 
 # 画像の変換処理
-TRANSFORM = transforms.Compose([
-    transforms.Resize(IMAGE_SIZE),
-    transforms.ToTensor(),
-])
+TRANSFORM = transforms.Compose(
+    [
+        transforms.Resize(IMAGE_SIZE),
+        transforms.ToTensor(),
+    ]
+)
 
 
-BASE_RESULT_DIR = '../results/'
+BASE_RESULT_DIR = "../results/"
 
 # リザルトフォルダのパス(パラメータ＋日時)
-RESULT_DIR = f'batch{BATCH_SIZE}_lr{LR}_epoch{EPOCHS}_imgsize{IMAGE_SIZE[0]}_' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + '/'
+RESULT_DIR = (
+    f"batch{BATCH_SIZE}_lr{LR}_epoch{EPOCHS}_imgsize{IMAGE_SIZE[0]}_"
+    + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    + "/"
+)
+
 
 def display_config() -> None:
     if IS_DISPLAY_CONFIG:
