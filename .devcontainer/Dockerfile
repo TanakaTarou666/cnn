@@ -24,4 +24,4 @@ RUN pip install --upgrade pip && \
 RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # 作業ディレクトリを変更
-WORKDIR /home
+WORKDIR /workspaces
