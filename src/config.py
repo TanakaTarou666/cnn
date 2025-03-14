@@ -17,6 +17,7 @@ IMAGE_SIZE = (256, 256)
 IS_DISPLAY_CONFIG = True
 
 # データセットのディレクトリ
+# 分類に使う画像のディレクトリを指定
 IMAGE_DIRS = {
     "train": [
         "../data/small-places/train/wave",

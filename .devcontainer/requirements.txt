@@ -22,3 +22,4 @@ seaborn
 scikit-learn
 scipy
 tqdm
+gdown

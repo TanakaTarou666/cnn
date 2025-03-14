@@ -1,6 +1,6 @@
 {
     // 開発用コンテナの名前
-    "name": "mypy111",
+    "name": "mycnn",
 
     // 使用する Dockerfile の指定
     "dockerFile": "Dockerfile",
