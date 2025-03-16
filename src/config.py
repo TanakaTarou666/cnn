@@ -7,7 +7,7 @@ import torchvision.transforms as transforms
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # ハイパーパラメータ
-SEED = 0
+SEED = 1
 BATCH_SIZE = 32
 LR = 0.001
 EPOCHS = 10
