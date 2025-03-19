@@ -34,7 +34,7 @@ class MyCNN(nn.Module):
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=2, padding=1)
 
         # 全結合層
-        self.fc1 = nn.Linear(16 * 16 * 32, 256)
+        self.fc1 = nn.Linear(32 * 16 * 16, 256)
         self.fc2 = nn.Linear(256, num_classes)
 
         # 重みの初期化
@@ -50,20 +50,20 @@ class MyCNN(nn.Module):
         Returns:
             torch.Tensor: クラスごとのスコア (shape: [batch_size, num_classes])。
         """
-        x = self.conv1(x)
+        x = self.conv1(x)  # [3, 256, 256] -> [16, 128, 128]
         x = self.relu(x)
-        x = self.pool(x)
+        x = self.pool(x)  # [16, 128, 128] -> [16, 64, 64]
 
-        x = self.conv2(x)
+        x = self.conv2(x)  # [16, 64, 64] -> [32, 32, 32]
         x = self.relu(x)
-        x = self.pool(x)
+        x = self.pool(x)  # [32, 32, 32] -> [32, 16, 16]
 
         # 平坦化処理（全結合層に入力するため）
-        x = x.view(x.size(0), -1)
+        x = x.view(x.size(0), -1)  # [32, 16, 16] -> [8,192 (32*16*16)]
 
-        x = self.fc1(x)
+        x = self.fc1(x)  # [8,192 (32*16*16)] -> [256]
         x = self.relu(x)
-        x = self.fc2(x)
+        x = self.fc2(x)  # [256] -> [num_classes]
 
         return x
 
