@@ -6,11 +6,9 @@
 Pytorchがcondaで入れられないので、パッケージのインストールは全てpipでお願いします。(ライブラリの競合を避けるため)
 
 ```bash
-cd .devcontainer
 conda create --name [仮想環境名] python=3.12.0
 conda activate [仮想環境名]
-pip install -r requirements.txt
-cd ..
+pip install -r .devcontainer/requirements.txt
 ```
 
 PyTorch のインストールについては、[公式サイト](https://pytorch.org/) を参照にコマンドを入手してください。
