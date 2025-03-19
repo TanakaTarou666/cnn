@@ -51,12 +51,14 @@ csv_file = utils.save_results_to_csv(result_dir, csv_columns)
 # 学習ループ開始
 print("Training Started!")
 
+# 最小の損失値を保持する変数
 min_running_loss = sys.float_info.max
 
+# エポックごとの学習ループ
 for epoch in range(EPOCHS):
-    running_loss = 0.0
-    correct = 0
-    total = 0
+    running_loss = 0.0  # エポック内の累積損失
+    correct = 0  # 正解数カウンター
+    total = 0  # サンプル数カウンター
 
     """ 学習ステップ """
 
@@ -66,17 +68,17 @@ for epoch in range(EPOCHS):
     # エポック開始時の時刻を記録
     epoch_start_time = datetime.datetime.now()
 
-    # 学習
+    # 学習データをバッチごとに処理
     for images, labels in train_loader:
         images, labels = images.to(DEVICE), labels.to(DEVICE)
 
-        optimizer.zero_grad()
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
+        optimizer.zero_grad()  # 勾配の初期化
+        outputs = model(images)  # モデルの順伝播
+        loss = criterion(outputs, labels)  # 損失の計算
+        loss.backward()  # 逆伝播（勾配計算）
+        optimizer.step()  # パラメータの更新
 
-        running_loss += loss.item()
+        running_loss += loss.item()  # 損失の累積計算
 
     # エポック終了時の時刻を記録
     epoch_end_time = datetime.datetime.now()
